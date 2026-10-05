@@ -30,6 +30,7 @@
   --wrap:1180px;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{background:var(--ink);color:var(--fg);font:16px/1.6 var(--f-body);margin:0}
@@ -112,6 +113,36 @@ tr:last-child td{border-bottom:0}
 .phases ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px;display:grid;gap:4px}
 .verify{margin-top:16px;padding:14px 16px;border:1px dashed var(--note-line);background:var(--note-bg);color:var(--note-fg);border-radius:var(--r);font-size:14.5px}
 
+
+/* audit v2 */
+.a-head{padding-top:8px}
+.a-logo{display:block;height:28px;width:auto;margin-bottom:28px}
+.a-head h1{font-size:clamp(28px,4vw,42px);margin-bottom:8px}
+.a-meta{font:13px var(--f-mono);color:var(--muted);margin-bottom:18px}
+.glance{margin:14px 0 0;padding-left:20px;display:grid;gap:8px;max-width:80ch;color:#c9d0e2}
+.glance b{color:var(--fg)}
+.glance.good li::marker{color:var(--good)}
+.sub-h{font:700 16px var(--f-body);margin-top:26px}
+.issue{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;padding-block:32px;border-top:1px solid var(--line)}
+.issue:first-of-type{border-top:0}
+.i-text{min-width:0}
+.i-n{font:600 12px var(--f-mono);letter-spacing:.08em;color:var(--sky);text-transform:uppercase}
+.issue h3{font:800 22px/1.25 var(--f-display);margin:8px 0 12px}
+.issue ul{margin:0;padding-left:20px;display:grid;gap:6px;color:#c9d0e2;font-size:15.5px}
+.ex,.fix{margin-top:14px;font-size:15px;padding:12px 14px;border-radius:8px;color:#d3d9ea}
+.ex{background:#0d1533;border-left:3px solid var(--warn)}
+.fix{background:#0c1b2a;border-left:3px solid var(--good)}
+.ex b{color:var(--warn)} .fix b{color:var(--good)}
+.i-shot{display:block;text-decoration:none;color:var(--muted);font-size:12.5px;min-width:0}
+.i-shot img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#000}
+.i-shot.narrow img{max-width:320px;margin-inline:auto}
+.i-shot span{display:block;margin-top:8px;text-align:center;font-family:var(--f-mono)}
+.code{margin:0;background:#03050a;border:1px solid var(--line);border-radius:8px;padding:16px;font:13px/1.6 var(--f-mono);color:#ffb3ba;overflow-x:auto;min-width:0}
+.code .c{color:var(--muted)}
+.order{margin-top:16px;font-size:15px;color:#c9d0e2}
+.logo img{display:block;height:24px;width:auto}
+@media (max-width:860px){.issue{grid-template-columns:1fr;gap:18px}}
+
 /* ================= MOCKUP VIEW ================= */
 .m{background:var(--ink)}
 .note{display:none;margin:0 auto 18px;max-width:var(--wrap);font:500 13.5px/1.5 var(--f-body);color:var(--note-fg);background:var(--note-bg);border:1px solid var(--note-line);border-radius:8px;padding:10px 14px}
@@ -159,7 +190,8 @@ body.notes-on .note{display:block}
 .proof b{color:var(--fg);font:800 18px var(--f-display)}
 .stars{color:#ffc84a;letter-spacing:2px;font-size:14px}
 .video{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,#1b2a5c 0%,#0a1330 70%)}
-.video .face{position:absolute;inset:18% 22% 30%;border-radius:50% 50% 44% 44%;background:radial-gradient(circle at 50% 35%,#3a4a80,#1a2550 70%)}
+.video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.video .x{position:absolute;inset:18% 22% 30%;border-radius:50% 50% 44% 44%;background:radial-gradient(circle at 50% 35%,#3a4a80,#1a2550 70%)}
 .video .play{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center;border:0;cursor:pointer}
 .video .play::after{content:"";border-left:22px solid var(--ink);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
 .video .cap{position:absolute;left:16px;right:16px;bottom:16px;background:rgba(5,7,13,.8);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
@@ -380,131 +412,229 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
 <main id="view-audit" class="audit" role="tabpanel" aria-labelledby="tab-audit">
 <div class="wrap">
 
+<section class="a-head">
+  <img src="assets/sidi-logo.png" alt="Sidi.io" class="a-logo" width="150" height="31">
+  <h1>Homepage review: sidi.io</h1>
+  <p class="a-meta">October 2026 · For Cody and the Sidi team · Checked on desktop (1440px) and mobile (390px)</p>
+  <p class="lede">The page converts warm traffic that already knows Sidi. It does little for people who don't: there is nothing for Google to rank, and most of the trust Sidi has earned is either missing or hidden from search engines. Below is what is broken, how it affects real visitors, and how to fix it.</p>
+</section>
+
 <section>
-  <div class="a-hero">
-    <div>
-      <span class="eyebrow">Homepage audit · sidi.io/</span>
-      <h1>The homepage sells like an ad landing page and ranks like one.</h1>
-      <p class="lede">sidi.io is currently a single GoHighLevel funnel page. It converts paid traffic it is sent to, but it gives Google and AI search nothing to rank or cite, and it hides most of the trust Sidi has earned (Ottawa roots, Fastest Growing Company 2022 to 2024, 155 Google reviews). For an agency that sells SEO, GEO and paid media, the homepage itself is the first case study prospects judge.</p>
+  <h2>At a glance</h2>
+  <ul class="glance">
+    <li><b>The site is one page.</b> sidi.io/services, /about, /blog and /contact all return 404.</li>
+    <li><b>robots.txt and sitemap.xml are empty files</b> (0 bytes).</li>
+    <li><b>25 H1 tags</b> on the homepage. There should be one.</li>
+    <li><b>No menu on mobile.</b> Desktop has 3 jump links.</li>
+    <li><b>Reviews load through a widget</b>, so Google and AI tools don't see them.</li>
+    <li><b>Riaz, the team, the Ottawa office and the awards</b> are never named on the page.</li>
+  </ul>
+  <h3 class="sub-h">What already works (keep it)</h3>
+  <ul class="glance good">
+    <li>Case studies show real ad creatives next to real numbers.</li>
+    <li>The founder video puts a face on the agency.</li>
+    <li>FAQ answers are clear and specific (60-day notice, client owns ad accounts).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>What's broken</h2>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">01 · SEO</span>
+      <h3>There are no pages beyond the homepage</h3>
+      <ul>
+        <li>Every service Sidi sells (Google Ads, SEO, social ads, GEO) gets one line at most. None has its own URL.</li>
+        <li>/services, /about, /blog and /contact return a 404 page.</li>
+      </ul>
+      <p class="ex"><b>Example:</b> someone in Ottawa searches "Google Ads agency Ottawa". Google shows competitors' Google Ads pages. Sidi has no page about Google Ads, so it can't appear. If that person types sidi.io/services, they get the screen on the right.</p>
+      <p class="fix"><b>Fix:</b> a page for each service, plus About, Team, Contact and Case Studies, all linked from a real menu.</p>
     </div>
-    <div class="score" aria-label="Homepage score 34 out of 100"><div><b>34</b><span>/ 100</span></div></div>
-  </div>
-  <div class="kpis">
-    <div class="kpi bad"><b>1</b><span>Indexable page on the whole domain. /about, /services, /blog and /contact all return 404</span></div>
-    <div class="kpi bad"><b>25</b><span>H1 tags on the homepage (every heading and stat is an H1)</span></div>
-    <div class="kpi bad"><b>0 bytes</b><span>robots.txt and sitemap.xml both return empty files</span></div>
-    <div class="kpi warn"><b>0</b><span>Reviews, team members, awards or locations shown on the page</span></div>
-  </div>
+    <a class="i-shot" href="assets/shot-services-404.jpg" target="_blank"><img src="assets/shot-services-404.jpg" alt="sidi.io/services returns a 404 Page not found screen" loading="lazy"><span>sidi.io/services today</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">02 · UX</span>
+      <h3>Mobile visitors have no menu</h3>
+      <ul>
+        <li>On a phone the header is the logo only. On desktop it's 3 jump links: How It Works, Proof, FAQ.</li>
+        <li>The mobile page is about 9,400px tall.</li>
+      </ul>
+      <p class="ex"><b>Example:</b> a marketing manager opens the site from a LinkedIn post on their phone to check if Sidi does SEO. There is no menu and no services section. They either scroll the whole page or leave.</p>
+      <p class="fix"><b>Fix:</b> a header with a menu on every screen size (see the mockup), with phone number and "Book a call" always visible.</p>
+    </div>
+    <a class="i-shot narrow" href="assets/shot-hero-mobile.jpg" target="_blank"><img src="assets/shot-hero-mobile.jpg" alt="Mobile header of sidi.io with logo only and no menu" loading="lazy"><span>Mobile, first screen</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">03 · Messaging</span>
+      <h3>The first screen doesn't say what Sidi does</h3>
+      <ul>
+        <li>At 1440x900 the "Schedule a call" button is below the fold. The visitor sees a headline and a video.</li>
+        <li>The headline is about wasted ad spend. It doesn't mention services, Ottawa or Canada.</li>
+        <li>The title tag says "Demand Generation Agency For The Bold", the meta description talks about healthcare and B2B, and the H1 talks about ad spend. Three different positions.</li>
+      </ul>
+      <p class="ex"><b>Example:</b> a business owner comparing three agencies gives each homepage a few seconds. On Sidi's they can't tell what is offered or where Sidi is based without pressing play or scrolling.</p>
+      <p class="fix"><b>Fix:</b> one line that says what Sidi is and where (performance marketing agency, Ottawa). Button and review rating visible without scrolling. Same line in the title tag and meta description.</p>
+    </div>
+    <a class="i-shot" href="assets/shot-hero-desktop.jpg" target="_blank"><img src="assets/shot-hero-desktop.jpg" alt="Desktop first screen of sidi.io with headline and video, no button visible" loading="lazy"><span>Desktop, first screen (1440x900)</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">04 · E-E-A-T</span>
+      <h3>The reviews are real, but search engines can't see them</h3>
+      <ul>
+        <li>The 4 Google reviews (Perley Health Foundation, Sedation Dental Group, Scrivens, Résidence Le Parc) are loaded by a third-party script. They are not in the page HTML.</li>
+        <li>When the script loads slowly, the section shows only the heading and a button. That is how it appeared in our first screenshot.</li>
+        <li>Four long white cards take about 1,600px. There is no overall rating (5.0 from 155 reviews).</li>
+      </ul>
+      <p class="ex"><b>Example:</b> when ChatGPT or Google's AI Overview looks for well-reviewed marketing agencies in Ottawa, it reads the page HTML. Sidi's reviews aren't in it.</p>
+      <p class="fix"><b>Fix:</b> rating summary plus 3 short quotes in plain HTML, with name, role and company. Link to the full Google profile.</p>
+    </div>
+    <a class="i-shot narrow" href="assets/shot-reviews.jpg" target="_blank"><img src="assets/shot-reviews.jpg" alt="Google reviews widget with four long white review cards" loading="lazy"><span>Reviews section, once the widget loads</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">05 · Content</span>
+      <h3>"How We Help You Win" could be on any agency's site</h3>
+      <ul>
+        <li>"A partner, not just a vendor", "No fluff", "world-class communication": no proof attached to any of them.</li>
+        <li>"70% less than hiring a team" has no source.</li>
+        <li>Centered paragraphs are slow to read.</li>
+      </ul>
+      <p class="fix"><b>Fix:</b> replace it with a services grid linking to each service page. Move the promises that matter (no markup, you own the accounts) into a short comparison with a typical agency and an in-house hire.</p>
+    </div>
+    <a class="i-shot" href="assets/shot-howwehelp.jpg" target="_blank"><img src="assets/shot-howwehelp.jpg" alt="How We Help You Win section with three generic benefit cards" loading="lazy"><span>How We Help You Win</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">06 · Trust</span>
+      <h3>Strong client logos, with no names attached</h3>
+      <ul>
+        <li>Carleton University, Algonquin College, Calian, SaaS North and others scroll by in a carousel with no label.</li>
+        <li>Every logo has the alt text "Logo", so search engines don't know who they are.</li>
+      </ul>
+      <p class="fix"><b>Fix:</b> label the strip ("Brands we've worked with"), name each logo in its alt text, and add the case-study brands (Fence-All, Lanark Lifestyles).</p>
+    </div>
+    <a class="i-shot" href="assets/shot-logos.jpg" target="_blank"><img src="assets/shot-logos.jpg" alt="Client logo carousel" loading="lazy"><span>Logo carousel</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">07 · Conversion</span>
+      <h3>The form asks for a lot and doesn't say what happens next</h3>
+      <ul>
+        <li>5 required fields: company, job title, name, email, phone.</li>
+        <li>Nothing about what happens after submitting, or how fast Sidi replies.</li>
+        <li>Two buttons with different labels ("Schedule a call" and "Schedule call"), one above the other.</li>
+      </ul>
+      <p class="ex"><b>Example:</b> the owner of a 10-person fencing company has to invent a job title. Someone who only wants to learn more has to hand over a phone number first. Both are common reasons people abandon a form.</p>
+      <p class="fix"><b>Fix:</b> two steps. First website, monthly budget and service needed, then name, email and optional phone. Drop job title. Add "We reply within 1 business day".</p>
+    </div>
+    <a class="i-shot" href="assets/shot-form.jpg" target="_blank"><img src="assets/shot-form.jpg" alt="Closing section with five-field contact form" loading="lazy"><span>Closing section and form</span></a>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">08 · E-E-A-T</span>
+      <h3>No people, no address, no awards</h3>
+      <ul>
+        <li>Riaz is in the video but never named. There is no team section.</li>
+        <li>No Ottawa address on the page or in the schema.</li>
+        <li>Ottawa Fastest Growing Companies (2022, 2023, 2024) isn't mentioned.</li>
+      </ul>
+      <p class="fix"><b>Fix:</b> a team section (Riaz plus 3 leads, with LinkedIn), awards and partner badges, and the full address in the footer and schema.</p>
+    </div>
+  </article>
+
+  <article class="issue">
+    <div class="i-text">
+      <span class="i-n">09 · Technical</span>
+      <h3>Code-level problems</h3>
+      <ul>
+        <li>25 H1 tags. Every heading and every stat is an H1, and the hero headline is in the HTML twice.</li>
+        <li>robots.txt and sitemap.xml return empty files. No canonical tag.</li>
+        <li>13 images have empty alt text.</li>
+        <li>A broken character in "you've" inside the schema markup.</li>
+        <li>"og:keywords" and "og:author" are not real tags and do nothing.</li>
+        <li>Schema has no address, no founder, and no links to the Google, LinkedIn or DesignRush profiles.</li>
+      </ul>
+      <p class="fix"><b>Fix:</b> one H1, H2 per section, H3 per card. Real robots.txt and sitemap. Canonical. Organization schema with address, founder and profile links.</p>
+    </div>
+    <pre class="code" aria-label="Extract from sidi.io source"><span class="c">&lt;!-- sidi.io, current HTML (extract) --&gt;</span>
+&lt;h1&gt;Scale Your Business Faster by Ending&lt;/h1&gt;
+&lt;h1&gt;Scale Your &lt;/h1&gt;
+&lt;h1&gt;by Ending the &lt;/h1&gt;
+&lt;h1&gt;How We Help You Win&lt;/h1&gt;
+&lt;h1&gt;7,281&lt;/h1&gt;
+&lt;h1&gt;Annual Net New Leads&lt;/h1&gt;
+&lt;h1&gt;+363%&lt;/h1&gt;
+<span class="c">... 18 more</span>
+
+<span class="c"># https://sidi.io/robots.txt</span>
+<span class="c">(empty, 0 bytes)</span>
+
+<span class="c"># https://sidi.io/sitemap.xml</span>
+<span class="c">(empty, 0 bytes)</span></pre>
+  </article>
 </section>
 
 <section>
-  <span class="eyebrow">Critical findings</span>
-  <h2>What is hurting SEO and E-E-A-T today</h2>
-  <div class="findings">
-    <div class="finding"><span class="sev crit">Critical</span><div><h3>One-page site: no URL can rank for a service</h3><p>Searches like <strong>"Google Ads agency Ottawa"</strong>, <strong>"SEO agency Canada"</strong> or <strong>"GEO agency"</strong> need a dedicated page each. Today there is nothing to point them to, and the nav only scrolls (How It Works, Proof, FAQ). The whiteboard IA (About, Services x5, Resources, Contact) is the right fix and is built into the mockup.</p></div></div>
-    <div class="finding"><span class="sev crit">Critical</span><div><h3>Empty robots.txt and sitemap.xml</h3><p>Both return HTTP 200 with zero bytes. Crawlers get no sitemap reference and no page list. Publish a real sitemap with every new URL and a robots.txt that points to it.</p></div></div>
-    <div class="finding"><span class="sev crit">Critical</span><div><h3>Heading structure is broken: 25 H1, the hero H1 is duplicated</h3><p>Every section title and every stat ("7,281", "Annual Net New Leads") is an H1, and the hero headline is rendered twice (desktop and mobile copies) plus split into fragments. Google cannot tell what the page is about. Rule: <strong>one H1</strong>, H2 per section, H3 per card, stats as styled text.</p></div></div>
-    <div class="finding"><span class="sev high">High</span><div><h3>Positioning says three different things</h3><p>Title tag: <strong>"Demand Generation Agency For The Bold"</strong>. Meta: healthcare and B2B demand gen in a world of agentic search. H1: <strong>"Ending the Cycle of Wasted Ad Spend"</strong>. Body: a Plug-and-Play paid ads team. Pick one entity statement and repeat it in title, H1, meta, schema and About.</p></div></div>
-    <div class="finding"><span class="sev high">High</span><div><h3>E-E-A-T is invisible</h3><p>No founder or team, no Ottawa address, no awards, no reviews, no certifications, no author on anything. "Trusted By Businesses Like Yours" is an <strong>empty section</strong> with only a button. Off-site, Sidi has a 5.0 Google rating (155 reviews), 4.9 on DesignRush (38 reviews) and 3 years as an Ottawa Fastest Growing Company. None of it reaches the page.</p></div></div>
-    <div class="finding"><span class="sev high">High</span><div><h3>Hero opens with the pain, not the promise</h3><p>"Wasted ad spend" and "ripped off by agencies" frames Sidi as a rescue service for burned buyers. A top-rated agency leads with the outcome and proof, then handles objections lower down. The hero also has no proof under the CTA.</p></div></div>
-    <div class="finding"><span class="sev med">Medium</span><div><h3>Schema is thin and partly wrong</h3><p>Organization has no address, no <strong>sameAs</strong> (Google, LinkedIn, DesignRush, Clutch), no founder. Only one generic Service. Add ProfessionalService/LocalBusiness with Ottawa NAP, Person for Riaz Sidi, one Service per service page. FAQPage markup is fine to keep for AI answers (Google no longer shows FAQ rich results for agencies).</p></div></div>
-    <div class="finding"><span class="sev med">Medium</span><div><h3>Hygiene: canonical, alts, encoding, fake meta</h3><p>No canonical tag. 13 images with empty alt and every client logo has alt "Logo". A broken character in "you've" (shows as a replacement glyph in the hero and schema). "og:keywords" and "og:author" are not real tags. The OG image is a generic asset.</p></div></div>
-    <div class="finding"><span class="sev med">Medium</span><div><h3>Unsupported claims weaken trust</h3><p>"70% less than hiring a team", "world-class communication" and "100% transparency" have no source. Case studies have no date, budget, timeframe or channel mix, and the Lanark case calls renters "buyers". Add the specifics or soften the claim.</p></div></div>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">Section by section</span>
-  <h2>Keep, fix, cut, or add</h2>
-  <p class="lede">Every current block, what is wrong with it, and what it becomes in the proposed homepage.</p>
+  <h2>Section by section</h2>
   <div class="tbl-wrap"><table>
-    <thead><tr><th>Section</th><th>Today</th><th>Recommendation</th></tr></thead>
+    <thead><tr><th>Section</th><th>Decision</th><th>What changes</th></tr></thead>
     <tbody>
-      <tr><td>Header / nav</td><td>Logo plus 3 anchor links. No services, no phone, no CTA in the bar.</td><td><span class="v fix">Fix</span><br>Megamenu: Services (grouped by Paid, Search, Growth), Industries, Results, About, Insights. Phone and "Book a strategy call" always visible.</td></tr>
-      <tr><td>Hero</td><td>Pain-led H1, long sub, video, one CTA, no proof.</td><td><span class="v fix">Fix</span><br>Outcome-led H1 with entity ("Ottawa performance marketing agency"), 2 CTAs (call + see results), review and award proof directly under the buttons. Keep the founder video but caption it with name and role.</td></tr>
-      <tr><td>Logo bar</td><td>5 logos, alt "Logo", no label.</td><td><span class="v fix">Fix</span><br>Cody: update the list. Add Fence-All and Lanark (the case-study brands), name each logo in alt text, label the strip.</td></tr>
-      <tr><td>How We Help You Win</td><td>3 abstract benefit cards ("No Fluff").</td><td><span class="v cut">Cut</span> as-is<br>Replace with a <b>Services</b> grid that links to real service pages. Move the 3 promises into "Why Sidi".</td></tr>
-      <tr><td>3 Simple Steps</td><td>Plain numbered list, second section on the page.</td><td><span class="v fix">Fix</span><br>Keep, but move after the proof. Add what the client gets at each step (audit, 30-day plan, weekly report).</td></tr>
-      <tr><td>Case studies</td><td>2 long text blocks, big stats as H1, one is missing its logo.</td><td><span class="v fix">Fix</span><br>Cody: add new campaigns. Card format: brand, industry, channels, 3 stats, link to full case study page. Add timeframe on each.</td></tr>
-      <tr><td>Trusted By (testimonials)</td><td>Empty section, only a CTA.</td><td><span class="v fix">Fix</span><br>Cody: redesign. Google rating summary plus 3 named reviews (name, title, company, source). Video testimonial slot if available.</td></tr>
-      <tr><td>FAQ</td><td>5 questions, good answers.</td><td><span class="v keep">Keep</span><br>Add pricing, minimum budget, which industries, and "Do you work outside Ottawa?". Change H3s from bold spans to clean text.</td></tr>
-      <tr><td>Final CTA</td><td>Recap bullets, email and phone.</td><td><span class="v keep">Keep</span><br>Merge with the form into one closing block.</td></tr>
-      <tr><td>Form</td><td>5 required fields including job title, no context about what happens next.</td><td><span class="v fix">Fix</span><br>Cody: new structure. 2-step form: work email, website, monthly budget, service interest, then name and phone. Say "Reply within 1 business day".</td></tr>
-      <tr><td>Why Sidi + comparison</td><td>Missing</td><td><span class="v new">Add</span><br>Sidi vs. typical agency vs. in-house hire. This is where transparency and Plug &amp; Play become concrete.</td></tr>
-      <tr><td>Team and credentials</td><td>Missing</td><td><span class="v new">Add</span><br>Riaz Sidi plus 3 leads with photo, role and LinkedIn. Awards and platform partner badges.</td></tr>
-      <tr><td>Industries</td><td>Missing</td><td><span class="v new">Add</span><br>5 tiles linking to industry pages (home services, senior living and real estate, healthcare, B2B tech, professional services).</td></tr>
-      <tr><td>Insights</td><td>Missing</td><td><span class="v new">Add</span><br>3 latest posts with author. Feeds topical authority for SEO and GEO.</td></tr>
-      <tr><td>Footer</td><td>Copyright and privacy link.</td><td><span class="v fix">Fix</span><br>Full sitemap footer, Ottawa NAP, review badges, social profiles (these double as sameAs).</td></tr>
+      <tr><td>Header</td><td><span class="v fix">Fix</span></td><td>Megamenu with services, industries, results, about. Menu on mobile.</td></tr>
+      <tr><td>Hero</td><td><span class="v fix">Fix</span></td><td>Say what Sidi is and where. Button and rating on the first screen. Name Riaz under the video.</td></tr>
+      <tr><td>Logo carousel</td><td><span class="v fix">Fix</span></td><td>Label it, name every logo, add case-study brands.</td></tr>
+      <tr><td>How We Help You Win</td><td><span class="v cut">Replace</span></td><td>Services grid linking to service pages.</td></tr>
+      <tr><td>3 Simple Steps</td><td><span class="v fix">Move</span></td><td>After the case studies. Say what the client gets at each step.</td></tr>
+      <tr><td>Case studies</td><td><span class="v keep">Keep</span></td><td>Add new campaigns, timeframe and channels. Stats as text, not H1. Link to full case study pages.</td></tr>
+      <tr><td>Reviews</td><td><span class="v fix">Fix</span></td><td>Rating summary + 3 short quotes in HTML.</td></tr>
+      <tr><td>FAQ</td><td><span class="v keep">Keep</span></td><td>Add price, minimum budget, location.</td></tr>
+      <tr><td>Form</td><td><span class="v fix">Fix</span></td><td>Two steps, fewer required fields, reply time.</td></tr>
+      <tr><td>Why Sidi (comparison)</td><td><span class="v new">Add</span></td><td>Sidi vs. typical agency vs. in-house hire.</td></tr>
+      <tr><td>Team and awards</td><td><span class="v new">Add</span></td><td>Riaz + 3 leads, Fastest Growing 2022 to 2024.</td></tr>
+      <tr><td>Industries, Insights</td><td><span class="v new">Add</span></td><td>Links to industry pages and the 3 latest posts.</td></tr>
+      <tr><td>Footer</td><td><span class="v fix">Fix</span></td><td>Links to every page, Ottawa address, social profiles.</td></tr>
     </tbody>
   </table></div>
+  <p class="order"><b>New order:</b> Hero → Logos → Results → Services → Why Sidi → Case studies → How we work → Reviews → Team → Industries → Insights → FAQ → Form</p>
 </section>
 
 <section>
-  <span class="eyebrow">Funnel order</span>
-  <h2>Proof before process, trust before the ask</h2>
-  <p class="lede">The current page asks for a call before it has shown proof, then shows proof, then asks again. The proposed order follows the questions a buyer has: what do you do, does it work, why you, who are you, what happens next.</p>
-  <div class="funnel">
-    <div><h3>Today</h3><ol>
-      <li>Hero + video <span class="stage">Attention</span></li>
-      <li>How We Help You Win (abstract) <small>Promises with no evidence yet</small></li>
-      <li>3 Simple Steps + CTA <small>Asks for the call before any proof</small></li>
-      <li>Case studies (2) + CTA <span class="stage">Proof</span></li>
-      <li class="gone">Trusted By (empty)</li>
-      <li>FAQ</li>
-      <li>Final CTA + form <span class="stage">Action</span></li>
-    </ol></div>
-    <div><h3>Proposed</h3><ol>
-      <li>Hero: outcome + proof under CTA <span class="stage">Attention</span></li>
-      <li>Client logos</li>
-      <li>Results in numbers <span class="stage">Interest</span></li>
-      <li>Services grid (links to pages) <small>Answers "what do you do", SEO hub</small></li>
-      <li>Why Sidi + comparison table <span class="stage">Consideration</span></li>
-      <li>Case studies</li>
-      <li>How we work (3 steps)</li>
-      <li>Reviews <span class="stage">Trust</span></li>
-      <li>Team + awards + partner badges</li>
-      <li>Industries we serve</li>
-      <li>Insights (blog)</li>
-      <li>FAQ <span class="stage">Objections</span></li>
-      <li>Final CTA + 2-step form <span class="stage">Action</span></li>
-    </ol></div>
-  </div>
+  <h2>Cody's 4 items</h2>
+  <ul class="glance">
+    <li><b>Client logo list:</b> label the strip, name each logo, add Fence-All and Lanark Lifestyles.</li>
+    <li><b>New campaign results:</b> same card format for every case (brand, industry, channels, timeframe, 3 numbers, link).</li>
+    <li><b>Testimonials:</b> rating summary + 3 named quotes in HTML. The mockup uses the real Google reviews.</li>
+    <li><b>Form:</b> two steps, job title removed, phone optional, reply time stated.</li>
+  </ul>
 </section>
 
 <section>
-  <span class="eyebrow">From the call with Cody</span>
-  <h2>The 4 agreed items, and where they land</h2>
-  <div class="cody">
-    <div><h3>Update client logo list</h3><p>Logo strip under the hero, labelled, each logo with the brand name as alt text. Include the brands used in case studies so proof is consistent.</p></div>
-    <div><h3>Update client proof with new campaigns</h3><p>Case-study cards in a fixed format (brand, industry, channels, timeframe, 3 metrics, link). Homepage shows 2 to 3; the rest live on /case-studies/.</p></div>
-    <div><h3>Testimonials with better structure</h3><p>Platform rating summary (Google, DesignRush) plus 3 named quotes with title and company. Pull real reviews; the mockup slots are marked as placeholders.</p></div>
-    <div><h3>Update form structure</h3><p>Two steps, qualifying fields first (website, budget, service), job title removed, response time stated. Fewer fields up front, better lead quality data for sales.</p></div>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">Site architecture</span>
-  <h2>The pages the homepage needs to link to</h2>
-  <p class="lede">Based on the whiteboard sitemap, expanded so each service and industry has its own URL. The homepage stays the hub; these pages do the ranking.</p>
-  <div class="ia">
-    <div><b>Services</b><ul><li>/services/google-ads/ (SEM)</li><li>/services/social-media-ads/</li><li>/services/ai-chatgpt-ads/</li><li>/services/seo/</li><li>/services/geo-ai-search/ (AIO/GEO)</li><li>/services/local-seo/</li><li>/services/landing-pages-cro/</li><li>/services/demand-generation/</li></ul></div>
-    <div><b>Industries</b><ul><li>/industries/home-services/</li><li>/industries/senior-living/</li><li>/industries/healthcare/</li><li>/industries/b2b-tech/</li><li>/industries/professional-services/</li></ul></div>
-    <div><b>Results</b><ul><li>/case-studies/</li><li>/case-studies/fence-all/</li><li>/case-studies/lanark/</li><li>/reviews/</li></ul></div>
-    <div><b>About</b><ul><li>/about/ (company, values)</li><li>/about/team/</li><li>/careers/</li><li>/contact/ (Ottawa NAP, map)</li></ul></div>
-    <div><b>Insights</b><ul><li>/blog/</li><li>/guides/ (lead magnets)</li><li>/marketing-budget-calculator/</li></ul></div>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">Roadmap</span>
-  <h2>Live in 21 days</h2>
-  <p class="lede">Three sprints with design, development, content and SEO working in parallel. Each sprint ends with something live, so nothing waits for a big-bang launch.</p>
+  <h2>21-day plan</h2>
+  <p class="lede">Design, development, content and SEO run in parallel. Something goes live at the end of each block.</p>
   <div class="phases">
-    <div><span class="eyebrow">Days 1 to 5</span><h3>Fix + gather</h3><ul><li><b>Dev/SEO:</b> one H1 and clean H2/H3 on the live page, real robots.txt and sitemap.xml, canonical, alts, encoding, remove fake og tags</li><li><b>Dev/SEO:</b> align title, meta and H1 on one positioning line</li><li><b>Content:</b> collect real reviews, client logos, new campaign results, team photos and bios, Ottawa address</li><li><b>Sidi:</b> confirm awards, partner status, minimum budget, platform decision (GHL or Webflow/WordPress)</li><li><b>Design:</b> approve the homepage mockup</li></ul></div>
-    <div><span class="eyebrow">Days 6 to 14</span><h3>Build homepage + core pages</h3><ul><li><b>Dev:</b> build the new homepage, megamenu, footer and 2-step form (GHL calendar + CRM routing)</li><li><b>Content:</b> About, Team, Contact and Case Studies hub, plus 2 to 3 case study pages</li><li><b>Content/SEO:</b> top 4 service pages: Google Ads, SEO, GEO, Social Ads</li><li><b>SEO:</b> full schema graph (Organization, Person, Service, FAQ) and internal links</li><li><b>Day 14:</b> homepage and core pages go live</li></ul></div>
-    <div><span class="eyebrow">Days 15 to 21</span><h3>Complete + launch</h3><ul><li><b>Content/SEO:</b> remaining service pages (AI Ads, Local SEO, CRO, Demand Gen) and 5 industry pages</li><li><b>Content:</b> first 2 to 3 blog posts with named authors</li><li><b>SEO:</b> final sitemap, Search Console submission, 301s, QA on mobile and Core Web Vitals</li><li><b>Marketing:</b> claim Clutch profile, send review requests, announce the awards</li><li><b>Day 21:</b> full site live</li></ul></div>
+    <div><span class="eyebrow">Days 1 to 5</span><h3>Fix and gather</h3><ul><li>One H1, robots.txt, sitemap, canonical, alts, encoding on the live page</li><li>Align title, meta and H1</li><li>Collect logos, new results, team photos and bios, address</li><li>Sidi confirms awards, partner status, minimum budget, platform</li><li>Approve the homepage mockup</li></ul></div>
+    <div><span class="eyebrow">Days 6 to 14</span><h3>Homepage and core pages</h3><ul><li>New homepage, menu, footer, 2-step form</li><li>About, Team, Contact, Case Studies</li><li>Google Ads, SEO, GEO and Social Ads pages</li><li>Schema and internal links</li><li>Day 14: homepage live</li></ul></div>
+    <div><span class="eyebrow">Days 15 to 21</span><h3>Finish and launch</h3><ul><li>Remaining service pages and 5 industry pages</li><li>First 2 to 3 blog posts with named authors</li><li>Search Console, redirects, mobile QA</li><li>Review requests and Clutch profile</li><li>Day 21: full site live</li></ul></div>
   </div>
-  <div class="verify"><b>Decision needed:</b> GoHighLevel can host a multi-page site, but its builder produces the heading and duplicate-content problems above by default. If Sidi wants to rank for competitive agency terms, consider moving the marketing site to Webflow or WordPress and keeping GHL for funnels, forms and CRM. <br><br><b>Verify before publishing:</b> review counts (Google 155, DesignRush 38), the Fastest Growing Company years, and partner status (Google Partner, Meta Business Partner) were taken from public profiles and need confirmation by Sidi before they go on the page.</div>
+</section>
+
+<section>
+  <h2>Open questions for Sidi</h2>
+  <ul class="glance">
+    <li><b>Platform:</b> stay on GoHighLevel, or move the marketing site to Webflow or WordPress and keep GHL for forms and CRM? GHL's builder is what produces the 25 H1s.</li>
+    <li><b>Confirm before publishing:</b> Google rating and count (5.0, 155), DesignRush (4.9, 38), the award years, Google Partner and Meta Partner status.</li>
+    <li><b>Still needed:</b> office address, minimum monthly budget, team names and photos.</li>
+  </ul>
 </section>
 
 </div>
@@ -515,7 +645,7 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
 
 <header class="nav" id="nav">
   <div class="wrap" style="position:relative">
-    <a href="#mock-top" class="logo">SIDI<i>.</i>IO</a>
+    <a href="#mock-top" class="logo"><img src="assets/sidi-logo.png" alt="Sidi.io" width="120" height="25"></a>
     <ul class="menu" id="menu">
       <li>
         <button aria-expanded="false" aria-controls="mm-services">Services</button>
@@ -562,7 +692,7 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
             <div class="mfeat">
               <span class="eyebrow">Featured result</span>
               <span class="big">100%</span>
-              <p>Occupancy for Lanark Phase 2 senior apartments at a $47.96 cost per lead.</p>
+              <p>Occupancy for Lanark Lifestyles Phase 2 senior apartments at a $47.96 cost per lead.</p>
             </div>
           </div>
         </div>
@@ -615,24 +745,25 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
         <div class="proof"><b>3×</b><div>Ottawa Fastest Growing<br>Company 2022 to 2024</div></div>
       </div>
     </div>
-    <div class="video" role="img" aria-label="Video poster: Riaz Sidi introduces Sidi.io">
-      <div class="face"></div>
+    <div class="video">
+      <img src="assets/founder-video.jpg" alt="Riaz Sidi, founder of Sidi.io, in the intro video">
       <button class="play" aria-label="Play 60-second intro"></button>
-      <div class="cap"><b>Why we started Sidi.io</b><span>Riaz Sidi, Founder &amp; President · 1:04</span></div>
+      <div class="cap"><b>Why we started Sidi.io</b><span>Riaz Sidi, Founder &amp; President</span></div>
     </div>
   </div>
 </section>
 
 <section class="logos" aria-label="Clients">
   <div class="wrap">
-    <small>Brands we have helped grow</small>
-    <span class="lg">TRATFORD</span>
-    <span class="lg">TAG HR</span>
-    <span class="lg thin">VALUETAINMENT</span>
+    <small>Brands we've worked with</small>
+    <span class="lg serif">Carleton University</span>
+    <span class="lg">ALGONQUIN COLLEGE</span>
+    <span class="lg">CALIAN</span>
     <span class="lg thin">NATIONAL ARTS CENTRE</span>
     <span class="lg">SaaS NORTH</span>
+    <span class="lg">TAG HR</span>
     <span class="lg serif">Fence-All</span>
-    <span class="lg thin">LANARK</span>
+    <span class="lg thin">LANARK LIFESTYLES</span>
   </div>
 </section>
 
@@ -642,8 +773,8 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
     <div class="numgrid">
       <div class="num"><b>7,281</b><span>Net new leads in a year</span><small>Fence-All · Google + Meta</small></div>
       <div class="num"><b>+363%</b><span>Google Ads conversion rate</span><small>Fence-All</small></div>
-      <div class="num"><b>100%</b><span>Building occupancy</span><small>Lanark Phase 2</small></div>
-      <div class="num"><b>$47.96</b><span>Average cost per lead</span><small>Lanark · 68% below market</small></div>
+      <div class="num"><b>100%</b><span>Building occupancy</span><small>Lanark Lifestyles, Phase 2</small></div>
+      <div class="num"><b>$47.96</b><span>Average cost per lead</span><small>Lanark Lifestyles · 68% below market</small></div>
     </div>
   </div>
 </section>
@@ -707,7 +838,7 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
         <div class="foot"><span class="chan">Google Ads · Meta · 12 months</span><a href="#cases">Read the case study →</a></div>
       </article>
       <article class="case">
-        <div class="top"><span class="brand">Lanark</span><span class="ind">Senior living</span></div>
+        <div class="top"><span class="brand">Lanark Lifestyles</span><span class="ind">Senior living</span></div>
         <div class="story">
           <p><b>Challenge:</b> Lease up Phase 2 of a luxury senior apartment building with a fixed budget.</p>
           <p><b>What we did:</b> High-intent Google and Meta campaigns for people searching for retirement living, plus landing pages per unit type.</p>
@@ -733,7 +864,7 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
 </section>
 
 <section class="m-sec reviews" id="reviews">
-  <div class="note wrap"><b>TESTIMONIALS</b>Cody: "better design structure". Platform ratings first, then named quotes with title and company. Quotes below are PLACEHOLDERS: replace with real Google reviews.</div>
+  <div class="note wrap"><b>TESTIMONIALS</b>Cody: "better design structure". Platform ratings first, then named quotes with title and company. Quotes are short excerpts of the real Google reviews already on the site, now in plain HTML.</div>
   <div class="wrap">
     <div class="head"><span class="eyebrow">Reviews</span><h2>What clients say after the first 90 days</h2></div>
     <div class="summary">
@@ -742,9 +873,9 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
       <div class="platform"><b>5.0</b><div><div class="stars">★★★★★</div><span>Glassdoor, team rating</span></div></div>
     </div>
     <div class="tgrid">
-      <figure class="tq feat" style="margin:0"><q>[Placeholder] Sidi took the time to understand our business before touching a single campaign. Within a season our phones were busier than they had ever been.</q><div class="who"><span class="av">FA</span><div><b>[Client name]</b><span>Owner, Fence-All</span></div></div><span class="src">Google review · verified</span></figure>
-      <figure class="tq" style="margin:0"><q>[Placeholder] Clear reports, no jargon, and a team that answers the same day.</q><div class="who"><span class="av">LK</span><div><b>[Client name]</b><span>Marketing Director, Lanark</span></div></div><span class="src">Google review</span></figure>
-      <figure class="tq" style="margin:0"><q>[Placeholder] It feels like having our own marketing department, without the hiring.</q><div class="who"><span class="av">TH</span><div><b>[Client name]</b><span>CEO, TAG HR</span></div></div><span class="src">DesignRush review</span></figure>
+      <figure class="tq feat" style="margin:0"><q>From the outset, it was evident that Sidi.io was not just another service provider but a partner invested in our success.</q><div class="who"><span class="av">CR</span><div><b>Courtney Rock</b><span>Director of Development, Perley Health Foundation</span></div></div><span class="src">Google review · Apr 2024</span></figure>
+      <figure class="tq" style="margin:0"><q>After transitioning from a previous agency where our expectations were not met, working with Sidi.io has been a breath of fresh air.</q><div class="who"><span class="av">SD</span><div><b>Sedation Dental Group</b><span>Dental clinic</span></div></div><span class="src">Google review · Feb 2024</span></figure>
+      <figure class="tq" style="margin:0"><q>We've been working with Sidi.io for the past year at Résidence Le Parc and couldn't be happier with the partnership.</q><div class="who"><span class="av">AL</span><div><b>Abid Lallani</b><span>Résidence Le Parc</span></div></div><span class="src">Google review</span></figure>
     </div>
   </div>
 </section>
@@ -869,7 +1000,7 @@ footer.mf{background:#000;padding-block:56px 32px;border-top:1px solid var(--lin
   <div class="note wrap"><b>FOOTER</b>Full link footer spreads authority to every page. NAP must match Google Business Profile exactly. Social and review links also go in schema as sameAs.</div>
   <div class="wrap">
     <div class="fgrid">
-      <div><a href="#mock-top" class="logo">SIDI<i>.</i>IO</a><p style="color:var(--muted);font-size:14px;margin-top:12px;max-width:34ch">Performance marketing agency in Ottawa for businesses across Canada and the US.</p>
+      <div><a href="#mock-top" class="logo"><img src="assets/sidi-logo.png" alt="Sidi.io" width="120" height="25"></a><p style="color:var(--muted);font-size:14px;margin-top:12px;max-width:34ch">Performance marketing agency in Ottawa for businesses across Canada and the US.</p>
         <div class="nap"><span>[Street address], Ottawa, ON [Postal code]</span><span>1-844-777-7434 · demand@sidi.io</span><span>★ 5.0 on Google · 155 reviews</span></div></div>
       <div><h4>Paid media</h4><ul><li><a href="#svc">Google Ads</a></li><li><a href="#svc">Social Media Ads</a></li><li><a href="#svc">AI &amp; ChatGPT Ads</a></li></ul></div>
       <div><h4>Search</h4><ul><li><a href="#svc">SEO</a></li><li><a href="#svc">GEO / AI Search</a></li><li><a href="#svc">Local SEO</a></li></ul></div>
